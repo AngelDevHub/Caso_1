@@ -1,0 +1,32 @@
+{
+  "name": "caso1-inscripcion-universidad",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Backend para Caso 1: Inscripción de alumnos a una universidad",
+  "main": "dist/infrastructure/server.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/infrastructure/server.ts",
+    "build": "tsc",
+    "start": "node dist/infrastructure/server.js"
+  },
+  "keywords": [
+    "node",
+    "typescript",
+    "clean-architecture",
+    "university",
+    "inscripcion"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.10.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.7.0"
+  }
+}

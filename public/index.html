@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Caso 1 - Inscripción Universidad</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <h1>Inscripción de alumnos a la universidad</h1>
+
+    <section>
+      <h2>Formulario de inscripción</h2>
+      <form id="enrollment-form">
+        <div>
+          <label for="studentId">ID Alumno:</label>
+          <input id="studentId" name="studentId" value="1" />
+        </div>
+        <div>
+          <label for="courseId">ID Curso:</label>
+          <input id="courseId" name="courseId" value="curso-1" />
+        </div>
+        <div>
+          <label>
+            <input
+              type="checkbox"
+              id="documentosCompletos"
+              name="documentosCompletos"
+              checked
+            />
+            Documentos completos
+          </label>
+        </div>
+        <div>
+          <label>
+            <input
+              type="checkbox"
+              id="pagoRegistrado"
+              name="pagoRegistrado"
+              checked
+            />
+            Pago registrado
+          </label>
+        </div>
+        <button type="submit">Inscribir</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Resultado</h2>
+      <pre id="result"></pre>
+    </section>
+
+    <script>
+      const form = document.getElementById("enrollment-form");
+      const resultEl = document.getElementById("result");
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const payload = {
+          studentId: document.getElementById("studentId").value,
+          courseId: document.getElementById("courseId").value,
+          documentosCompletos:
+            document.getElementById("documentosCompletos").checked,
+          pagoRegistrado: document.getElementById("pagoRegistrado").checked
+        };
+
+        resultEl.textContent = "Enviando...";
+
+        try {
+          const response = await fetch("/api/enrollments", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+          });
+
+          const data = await response.json();
+          resultEl.textContent = JSON.stringify(data, null, 2);
+        } catch (error) {
+          resultEl.textContent = "Error al llamar al backend";
+        }
+      });
+    </script>
+  </body>
+</html>
+
